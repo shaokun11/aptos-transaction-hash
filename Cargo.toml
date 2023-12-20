@@ -1,0 +1,16 @@
+[package]
+name = "bsc-helper"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aptos-crypto = {git="https://github.com/aptos-labs/aptos-core",package="aptos-crypto", rev= "920632983104c1f99ec996979d3d558132c03545" }
+aptos_types = {git="https://github.com/aptos-labs/aptos-core",package="aptos-types", rev= "920632983104c1f99ec996979d3d558132c03545" }
+bcs = "0.1.6"
+hex = "0.4.3"
+rand = "0.7.3"
+rand_core = "0.5.1"
+random_word = "0.3.0"
+
