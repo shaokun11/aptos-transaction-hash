@@ -21,12 +21,18 @@ fn main() {
     // println!("--k2-pub :{}", hex::encode(private_key.public_key().to_bytes()));
     //
     // let serialized_keys = bcs::to_bytes(&private_key).unwrap();
-    // let aptos_root_key_path = "mint.key";
-    // let mut key_file = fs::File::create(&aptos_root_key_path).unwrap();
-    // key_file.write_all(&serialized_keys).unwrap();
-    // let x = "b3e5e9d58797efbce688894c9aebf09afb074d9c03201b452bc81e8afcd4a75d9b020000000000000200000000000000000000000000000000000000000000000000000000000000010365766d076465706f73697400021514f99be3213562e5a381abb02818f1321304b44eaa07065af3107a4000400d03000000000064000000000000004877826500000000040020d91cd0f918bcf87fa5b1969dbe21af5973de6abbc1eced010f866e4a19dbeeca402031f26d165ef51ac75f8ebacf62d2c62ea454c3f0c67fa4c956a4e2d2e4a5fdb2fd0923287e9e2d1ebd4b314cdca237de3e925870ac52be0751ed837ceb300c";
+
+    let x = "b3e5e9d58797efbce688894c9aebf09afb074d9c03201b452bc81e8afcd4a75d9b020000000000000200000000000000000000000000000000000000000000000000000000000000010365766d076465706f73697400021514f99be3213562e5a381abb02818f1321304b44eaa07065af3107a4000400d03000000000064000000000000004877826500000000040020d91cd0f918bcf87fa5b1969dbe21af5973de6abbc1eced010f866e4a19dbeeca402031f26d165ef51ac75f8ebacf62d2c62ea454c3f0c67fa4c956a4e2d2e4a5fdb2fd0923287e9e2d1ebd4b314cdca237de3e925870ac52be0751ed837ceb300c";
     let x = args.get(1).unwrap().as_str();
     let s = bcs::from_bytes::<SignedTransaction>(&hex::decode(x).unwrap());
     println!("{}",hex::encode(s.unwrap().committed_hash().to_vec()))
 
+}
+
+fn read_mint_key(){
+    let aptos_root_key_path = "mint.key";
+    let  key_file = fs::read(aptos_root_key_path,).unwrap();
+    let unwrap_bcs = bcs::from_bytes::<Vec<u8>>(&key_file).unwrap();
+    let serialized_keys = Ed25519PrivateKey::try_from(unwrap_bcs.as_slice()).unwrap();
+    println!("--serialized_keys:{}", hex::encode(serialized_keys.to_bytes()));
 }
